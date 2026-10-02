@@ -1,0 +1,164 @@
+{
+  "status": "current clean-extraction reproduction and document build passed",
+  "date": "2026-09-25",
+  "archive_layout": {
+    "project_archive": "dependency-complete-safe-speculation-web-execution-graphs.zip",
+    "project_root": "dependency-complete-safe-speculation-web-execution-graphs",
+    "project_root_entries": [
+      "paper",
+      "artifact",
+      "research-plan.md",
+      "CURRENT-STATE.md"
+    ],
+    "standalone_archive": "dependency-complete-safe-speculation.zip",
+    "standalone_root": "dependency-complete-safe-speculation"
+  },
+  "scientific_reproduction": {
+    "exact_result_csv_match": true,
+    "exact_declared_count_match": true,
+    "unit_tests": {
+      "passed": 13,
+      "failed": 0
+    },
+    "suites": [
+      {
+        "suite": "relations",
+        "exact_result_match": true,
+        "counts": {
+          "graph_instances": 1056,
+          "independent_replay_rows": 2048,
+          "monotonicity_environment_edges": 526336
+        }
+      },
+      {
+        "suite": "padding",
+        "exact_result_match": true,
+        "counts": {
+          "graph_instances": 510,
+          "repaired_environment_rows": 4080
+        }
+      },
+      {
+        "suite": "circuits",
+        "exact_result_match": true,
+        "counts": {
+          "graph_instances": 128,
+          "independent_replay_rows": 40960,
+          "seed": 1729
+        }
+      },
+      {
+        "suite": "general",
+        "exact_result_match": true,
+        "counts": {
+          "graph_instances": 256,
+          "independent_replay_rows": 32768,
+          "seed": 65537
+        }
+      },
+      {
+        "suite": "gaps",
+        "exact_result_match": true,
+        "counts": {
+          "gap_instances": 8,
+          "correlated_composition": {
+            "joint_adaptive": 1,
+            "separate_adaptive_sum": 2,
+            "joint_uniform": 2
+          }
+        }
+      },
+      {
+        "suite": "baselines",
+        "exact_result_match": true,
+        "counts": {
+          "tight_instances": 12,
+          "random_graphs": 128,
+          "descendant_soundness_rows": 2072,
+          "observation_refinement_environment_rows": 1024,
+          "seed": 104729
+        }
+      },
+      {
+        "suite": "negatives",
+        "exact_result_match": true,
+        "counts": {
+          "negative_controls": 24,
+          "detected": 24
+        }
+      }
+    ],
+    "clean_run_observation": {
+      "validation_cpu_seconds": 4.86763852,
+      "child_cpu_seconds": 9.127362,
+      "wall_seconds": 9.144258001000026,
+      "peak_child_rss_kib": 104232,
+      "workers": 1,
+      "scope": "fresh candidate-archive extraction; platform observation, not an equality target"
+    },
+    "targeted_repairs": {
+      "gap_success_family_pairs_p_1_to_3": 168,
+      "gap_full_range": "p=1..8 with A=1 and U=p",
+      "random_graphs": 128,
+      "strict_baseline_gaps": 53,
+      "positive_optima": 120,
+      "maximum_positive_ratio": 4,
+      "mean_positive_ratio_fraction": "187/144",
+      "mean_positive_ratio_decimal": 1.2986111111111112,
+      "zero_denominator_encoding": "undefined",
+      "table_iv_frequency_match": true,
+      "cost_columns_unchanged_by_ratio_derivation": true
+    }
+  },
+  "retained_original_validation_resource_record": {
+    "suite_cpu_seconds": 5.275391517,
+    "suite_wall_seconds": 5.290027825999914,
+    "peak_child_rss_kib": 94508,
+    "circuits_cpu_seconds": 2.74431932,
+    "interpretation": "original seven-suite validation observation; separate from clean reproduction and not a cross-platform equality target"
+  },
+  "documented_command_checks": {
+    "analyze": {
+      "passed": true,
+      "adaptive_cost": 1,
+      "uniform_cost": 3
+    },
+    "retained_certificate_verify": true,
+    "generated_uniform_certificate_verify": true,
+    "compileall": true,
+    "unit_tests": {
+      "passed": 13,
+      "failed": 0
+    }
+  },
+  "paper_clean_build": {
+    "command": "python build.py",
+    "passed": true,
+    "main_pages": 12,
+    "supplement_pages": 6,
+    "main_bibliography_entries": 39,
+    "page_size": "letter",
+    "all_fonts_embedded": true,
+    "encrypted": false,
+    "overfull_boxes": 0,
+    "undefined_references_or_citations": false,
+    "missing_character_warnings": false,
+    "normalized_text_matches_retained_pdf": true,
+    "render_comparison_dpi": 96,
+    "render_changed_pages": 0
+  },
+  "post_record_archive_verification": {
+    "passed": true,
+    "required_checks": [
+      "ZIP integrity",
+      "single-root layout",
+      "embedded/standalone artifact byte agreement before execution",
+      "clean scientific reproduction",
+      "documented CLI checks",
+      "clean paper build",
+      "PDF text and 96-dpi render equality"
+    ],
+    "note": "This field is valid only because the exact resulting archives were freshly extracted and retested after this record was written; no later archive mutation is permitted."
+  },
+  "caveat": "Self-reproduction of finite evidence and document builds, not independent peer review, proof-assistant verification, browser validation, deployment evidence, or performance benchmarking."
+}

@@ -1,0 +1,48 @@
+{
+  "status": "final retained campaign passed",
+  "suite_cpu_seconds": 5.275391517,
+  "suite_wall_seconds": 5.290027825999914,
+  "peak_rss_kib": 94508,
+  "workers": 1,
+  "suites": {
+    "relations": {
+      "graph_instances": 1056,
+      "independent_replay_rows": 2048,
+      "monotonicity_environment_edges": 526336
+    },
+    "padding": {
+      "graph_instances": 510,
+      "repaired_environment_rows": 4080
+    },
+    "circuits": {
+      "graph_instances": 128,
+      "independent_replay_rows": 40960,
+      "seed": 1729
+    },
+    "general": {
+      "graph_instances": 256,
+      "independent_replay_rows": 32768,
+      "seed": 65537
+    },
+    "gaps": {
+      "gap_instances": 8,
+      "correlated_composition": {
+        "joint_adaptive": 1,
+        "separate_adaptive_sum": 2,
+        "joint_uniform": 2
+      }
+    },
+    "baselines": {
+      "tight_instances": 12,
+      "random_graphs": 128,
+      "descendant_soundness_rows": 2072,
+      "observation_refinement_environment_rows": 1024,
+      "seed": 104729
+    },
+    "negatives": {
+      "negative_controls": 24,
+      "detected": 24
+    }
+  },
+  "interpretation": "bounded finite validation only; timings and RSS are platform observations"
+}

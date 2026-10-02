@@ -1,0 +1,19 @@
+{
+  "suite": "gaps",
+  "status": "finite checks passed",
+  "counts": {
+    "gap_instances": 8,
+    "correlated_composition": {
+      "joint_adaptive": 1,
+      "separate_adaptive_sum": 2,
+      "joint_uniform": 2
+    }
+  },
+  "cpu_seconds": 0.020543922999999964,
+  "wall_seconds": 0.024082856999939395,
+  "peak_rss_kib": 93472,
+  "workers": 1,
+  "failures": 0,
+  "timeouts": 0,
+  "interpretation": "Bounded finite validation; not a general machine proof or representative workload study"
+}

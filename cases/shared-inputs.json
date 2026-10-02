@@ -1,0 +1,98 @@
+{
+  "inputs": [
+    {
+      "id": "d",
+      "domain": [
+        0,
+        1
+      ],
+      "prediction": 0
+    },
+    {
+      "id": "u0",
+      "domain": [
+        0,
+        1
+      ],
+      "prediction": 0
+    }
+  ],
+  "nodes": [
+    {
+      "id": "g0",
+      "op": "copy",
+      "args": [
+        "d"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "g1",
+      "op": "copy",
+      "args": [
+        "d"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "g2",
+      "op": "and",
+      "args": [
+        "u0",
+        "g0"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g3",
+      "op": "not",
+      "args": [
+        "u0"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g4",
+      "op": "and",
+      "args": [
+        "g3",
+        "g1"
+      ],
+      "speculative": false
+    }
+  ],
+  "observations": [
+    "g2",
+    "g4"
+  ],
+  "dependencies": [
+    [
+      "d",
+      "g0"
+    ],
+    [
+      "d",
+      "g1"
+    ],
+    [
+      "u0",
+      "g2"
+    ],
+    [
+      "g0",
+      "g2"
+    ],
+    [
+      "u0",
+      "g3"
+    ],
+    [
+      "g3",
+      "g4"
+    ],
+    [
+      "g1",
+      "g4"
+    ]
+  ]
+}

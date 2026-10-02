@@ -1,0 +1,16 @@
+{
+  "suite": "general",
+  "status": "finite checks passed",
+  "counts": {
+    "graph_instances": 256,
+    "independent_replay_rows": 32768,
+    "seed": 65537
+  },
+  "cpu_seconds": 1.2120138230000002,
+  "wall_seconds": 1.2132692019999922,
+  "peak_rss_kib": 93096,
+  "workers": 1,
+  "failures": 0,
+  "timeouts": 0,
+  "interpretation": "Bounded finite validation; not a general machine proof or representative workload study"
+}

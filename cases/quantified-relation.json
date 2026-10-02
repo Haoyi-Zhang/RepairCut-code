@@ -1,0 +1,189 @@
+{
+  "inputs": [
+    {
+      "id": "d",
+      "domain": [
+        0,
+        1
+      ],
+      "prediction": 0
+    },
+    {
+      "id": "u0",
+      "domain": [
+        0,
+        1
+      ],
+      "prediction": 0
+    }
+  ],
+  "nodes": [
+    {
+      "id": "t0",
+      "op": "copy",
+      "args": [
+        "d"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "f0",
+      "op": "copy",
+      "args": [
+        "d"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "e0",
+      "op": "copy",
+      "args": [
+        "d"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "e1",
+      "op": "copy",
+      "args": [
+        "e0"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "g0",
+      "op": "not",
+      "args": [
+        "u0"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g1",
+      "op": "and",
+      "args": [
+        "g0",
+        "f0"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g2",
+      "op": "and",
+      "args": [
+        "u0",
+        "t0"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g3",
+      "op": "or",
+      "args": [
+        "g1",
+        "g2"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g4",
+      "op": "or",
+      "args": [
+        "t0",
+        "f0"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g5",
+      "op": "and",
+      "args": [
+        "g4",
+        "g3"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g6",
+      "op": "or",
+      "args": [
+        "e1",
+        "g5"
+      ],
+      "speculative": false
+    }
+  ],
+  "observations": [
+    "g6"
+  ],
+  "dependencies": [
+    [
+      "d",
+      "t0"
+    ],
+    [
+      "d",
+      "f0"
+    ],
+    [
+      "d",
+      "e0"
+    ],
+    [
+      "e0",
+      "e1"
+    ],
+    [
+      "u0",
+      "g0"
+    ],
+    [
+      "g0",
+      "g1"
+    ],
+    [
+      "f0",
+      "g1"
+    ],
+    [
+      "u0",
+      "g2"
+    ],
+    [
+      "t0",
+      "g2"
+    ],
+    [
+      "g1",
+      "g3"
+    ],
+    [
+      "g2",
+      "g3"
+    ],
+    [
+      "t0",
+      "g4"
+    ],
+    [
+      "f0",
+      "g4"
+    ],
+    [
+      "g4",
+      "g5"
+    ],
+    [
+      "g3",
+      "g5"
+    ],
+    [
+      "e1",
+      "g6"
+    ],
+    [
+      "g5",
+      "g6"
+    ]
+  ]
+}

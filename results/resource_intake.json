@@ -1,0 +1,17 @@
+{
+  "available_affinity_cpus": 5,
+  "cgroup_cpu_quota_cores": 4,
+  "cgroup_memory_limit_bytes": 4294967296,
+  "cgroup_memory_current_bytes": 359284736,
+  "host_mem_available_kib": 5065468,
+  "swap_total_kib": 0,
+  "writable_free_bytes": 32029835264,
+  "scientific_workers": 1,
+  "scientific_affinity_cpus": 1,
+  "scientific_address_space_limit_bytes": 3221225472,
+  "campaign_cpu_ceiling_seconds": 28800,
+  "repair_and_reproduction_reserve_seconds": 7200,
+  "download_ceiling_bytes": 1073741824,
+  "expanded_input_ceiling_bytes": 2147483648,
+  "archive_ceiling_bytes": 134217728
+}

@@ -1,0 +1,15 @@
+{
+  "suite": "padding",
+  "status": "finite checks passed",
+  "counts": {
+    "graph_instances": 510,
+    "repaired_environment_rows": 4080
+  },
+  "cpu_seconds": 0.8787623420000001,
+  "wall_seconds": 0.8795105639997018,
+  "peak_rss_kib": 94508,
+  "workers": 1,
+  "failures": 0,
+  "timeouts": 0,
+  "interpretation": "Bounded finite validation; not a general machine proof or representative workload study"
+}

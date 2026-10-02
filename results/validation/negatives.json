@@ -1,0 +1,15 @@
+{
+  "suite": "negatives",
+  "status": "finite checks passed",
+  "counts": {
+    "negative_controls": 24,
+    "detected": 24
+  },
+  "cpu_seconds": 0.0,
+  "wall_seconds": 0.002308644000095228,
+  "peak_rss_kib": 92708,
+  "workers": 1,
+  "failures": 0,
+  "timeouts": 0,
+  "interpretation": "Bounded finite validation; not a general machine proof or representative workload study"
+}

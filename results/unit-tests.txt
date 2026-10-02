@@ -1,0 +1,18 @@
+test_certificate_rejects_noncanonical_values (test_model.SemanticsTests.test_certificate_rejects_noncanonical_values) ... ok
+test_descendant_invalidation_is_safe (test_model.SemanticsTests.test_descendant_invalidation_is_safe) ... ok
+test_duplicate_operand_is_one_edge (test_model.SemanticsTests.test_duplicate_operand_is_one_edge) ... ok
+test_explicit_stack_deep_chain (test_model.SemanticsTests.test_explicit_stack_deep_chain) ... ok
+test_fixed_actual_input_and_prediction (test_model.SemanticsTests.test_fixed_actual_input_and_prediction) ... ok
+test_full_state_principal_family (test_model.SemanticsTests.test_full_state_principal_family) ... ok
+test_gap_and_certificates (test_model.SemanticsTests.test_gap_and_certificates) ... ok
+test_graph_rejects_every_unknown_edge (test_model.SemanticsTests.test_graph_rejects_every_unknown_edge) ... ok
+test_invalidation_gap_is_tight (test_model.SemanticsTests.test_invalidation_gap_is_tight) ... ok
+test_no_speculative_gates (test_model.SemanticsTests.test_no_speculative_gates) ... ok
+test_observation_refinement_never_lowers_cost (test_model.SemanticsTests.test_observation_refinement_never_lowers_cost) ... ok
+test_roundtrip (test_model.SemanticsTests.test_roundtrip) ... ok
+test_row_limit (test_model.SemanticsTests.test_row_limit) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.124s
+
+OK

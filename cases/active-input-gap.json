@@ -1,0 +1,164 @@
+{
+  "inputs": [
+    {
+      "id": "d",
+      "domain": [
+        0,
+        1
+      ],
+      "prediction": 0
+    },
+    {
+      "id": "u0",
+      "domain": [
+        0,
+        1
+      ],
+      "prediction": 0
+    },
+    {
+      "id": "u1",
+      "domain": [
+        0,
+        1
+      ],
+      "prediction": 0
+    },
+    {
+      "id": "u2",
+      "domain": [
+        0,
+        1
+      ],
+      "prediction": 0
+    }
+  ],
+  "nodes": [
+    {
+      "id": "s0",
+      "op": "copy",
+      "args": [
+        "d"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "s1",
+      "op": "copy",
+      "args": [
+        "d"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "s2",
+      "op": "copy",
+      "args": [
+        "d"
+      ],
+      "speculative": true
+    },
+    {
+      "id": "g0",
+      "op": "and",
+      "args": [
+        "u0",
+        "s0"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g1",
+      "op": "and",
+      "args": [
+        "u1",
+        "s1"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g2",
+      "op": "and",
+      "args": [
+        "u2",
+        "s2"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g3",
+      "op": "or",
+      "args": [
+        "g0",
+        "g1"
+      ],
+      "speculative": false
+    },
+    {
+      "id": "g4",
+      "op": "or",
+      "args": [
+        "g3",
+        "g2"
+      ],
+      "speculative": false
+    }
+  ],
+  "observations": [
+    "g4"
+  ],
+  "dependencies": [
+    [
+      "d",
+      "s0"
+    ],
+    [
+      "d",
+      "s1"
+    ],
+    [
+      "d",
+      "s2"
+    ],
+    [
+      "u0",
+      "g0"
+    ],
+    [
+      "s0",
+      "g0"
+    ],
+    [
+      "u1",
+      "g1"
+    ],
+    [
+      "s1",
+      "g1"
+    ],
+    [
+      "u2",
+      "g2"
+    ],
+    [
+      "s2",
+      "g2"
+    ],
+    [
+      "g0",
+      "g3"
+    ],
+    [
+      "g1",
+      "g3"
+    ],
+    [
+      "g3",
+      "g4"
+    ],
+    [
+      "g2",
+      "g4"
+    ]
+  ]
+}
