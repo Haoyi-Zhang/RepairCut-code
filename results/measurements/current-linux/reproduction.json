@@ -1,0 +1,77 @@
+{
+  "status": "clean reproduction checks passed",
+  "suites": [
+    {
+      "suite": "relations",
+      "exact_result_match": true,
+      "counts": {
+        "graph_instances": 1056,
+        "independent_replay_rows": 2048,
+        "monotonicity_environment_edges": 526336
+      }
+    },
+    {
+      "suite": "padding",
+      "exact_result_match": true,
+      "counts": {
+        "graph_instances": 510,
+        "repaired_environment_rows": 4080
+      }
+    },
+    {
+      "suite": "circuits",
+      "exact_result_match": true,
+      "counts": {
+        "graph_instances": 128,
+        "independent_replay_rows": 40960,
+        "seed": 1729
+      }
+    },
+    {
+      "suite": "general",
+      "exact_result_match": true,
+      "counts": {
+        "graph_instances": 256,
+        "independent_replay_rows": 32768,
+        "seed": 65537
+      }
+    },
+    {
+      "suite": "gaps",
+      "exact_result_match": true,
+      "counts": {
+        "gap_instances": 8,
+        "correlated_composition": {
+          "joint_adaptive": 1,
+          "separate_adaptive_sum": 2,
+          "joint_uniform": 2
+        }
+      }
+    },
+    {
+      "suite": "baselines",
+      "exact_result_match": true,
+      "counts": {
+        "tight_instances": 12,
+        "random_graphs": 128,
+        "descendant_soundness_rows": 2072,
+        "observation_refinement_environment_rows": 1024,
+        "seed": 104729
+      }
+    },
+    {
+      "suite": "negatives",
+      "exact_result_match": true,
+      "counts": {
+        "negative_controls": 24,
+        "detected": 24
+      }
+    }
+  ],
+  "validation_cpu_seconds": 5.5246779329999995,
+  "child_cpu_seconds": 6.333108,
+  "wall_seconds": 6.571370633999997,
+  "peak_child_rss_kib": 37152,
+  "workers": 1,
+  "caveat": "Self-reproduction of finite evidence, not an independent review or general proof"
+}

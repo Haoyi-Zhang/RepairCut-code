@@ -121,10 +121,11 @@ Each suite runs in one child process with one CPU, a 3 GiB virtual-address cap,
 above 2^25 environment/repair rows or a conservative 2 GiB bit-vector payload.
 A timeout or admission rejection is a failure, never a scientific answer.
 
-The retained original seven-suite record reports 5.275391517 CPU seconds,
-5.290027825999914 wall seconds, and 94,508 KiB maximum child RSS; the circuits
-suite reports 2.74431932 CPU seconds. Clean reproduction has a separate timing
-record. Scientific equality uses CSV rows and declared counts, not timing or RSS.
+The current Ubuntu reproduction passed 15 tests and matched seven suites,
+2,134 ordered CSV rows, and every scientific count. It measured 6.333108 child
+CPU seconds, 6.571371 elapsed seconds, and 37,152 KiB peak child RSS; the raw
+record is in `results/measurements/current-linux/`. Earlier measurements remain
+in `cpu-accounting.json`. Scientific equality excludes timing and RSS.
 
 ## Evidence map
 
