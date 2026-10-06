@@ -1,5 +1,5 @@
 {
-  "status": "current clean-extraction reproduction and document build passed",
+  "status": "historical 2026-09-25 clean-extraction reproduction and document build passed",
   "date": "2026-09-25",
   "archive_layout": {
     "project_archive": "dependency-complete-safe-speculation-web-execution-graphs.zip",
@@ -158,7 +158,7 @@
       "clean paper build",
       "PDF text and 96-dpi render equality"
     ],
-    "note": "This field is valid only because the exact resulting archives were freshly extracted and retested after this record was written; no later archive mutation is permitted."
+    "note": "Historical assertion for the named 2026-09-25 archives: the exact resulting archives were freshly extracted and retested after this record was written. It is not verification of later candidate source edits or PDFs."
   },
   "caveat": "Self-reproduction of finite evidence and document builds, not independent peer review, proof-assistant verification, browser validation, deployment evidence, or performance benchmarking."
 }

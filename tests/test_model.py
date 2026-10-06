@@ -1,5 +1,6 @@
 import copy
 import unittest
+from unittest.mock import patch
 from speculation.validate import resource_guard
 resource_guard()
 from speculation.model import Graph,Node,load_graph
@@ -8,6 +9,7 @@ from speculation.builders import (gap_graph,full_observer,circuit_reduction,
 from speculation.bitcheck import analyze
 from speculation.replay import run,certificate,verify,fullstate_costs
 from speculation.baselines import descendant_invalidation,complete_state_mismatch
+from speculation import validate
 
 class SemanticsTests(unittest.TestCase):
     def test_roundtrip(self):
@@ -97,5 +99,23 @@ class SemanticsTests(unittest.TestCase):
         self.assertTrue(all(y>=x for x,y in zip(a.pointwise_min,b.pointwise_min)))
         self.assertGreaterEqual(b.adaptive_min,a.adaptive_min)
         self.assertGreaterEqual(b.uniform_min,a.uniform_min)
+
+    @staticmethod
+    def wrong_zero_costs(graph):
+        # Keep the success table intact; corrupt only an already-positive optimum.
+        # Budget-threshold checks alone used to accept this incorrect report.
+        result=analyze(graph)
+        if result.adaptive_min == result.uniform_min == 1:
+            result.pointwise_min=[0]*len(result.pointwise_min)
+            result.uniform_min=0
+        return result
+
+    def test_relation_oracle_rejects_wrong_zero_costs(self):
+        with patch('speculation.validate.analyze',side_effect=self.wrong_zero_costs):
+            with self.assertRaises(AssertionError):validate.relations()
+
+    def test_circuit_oracle_rejects_wrong_zero_costs(self):
+        with patch('speculation.validate.analyze',side_effect=self.wrong_zero_costs):
+            with self.assertRaises(AssertionError):validate.circuits()
 
 if __name__=='__main__':unittest.main()

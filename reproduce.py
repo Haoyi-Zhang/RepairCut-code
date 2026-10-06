@@ -15,6 +15,27 @@ SUITES=('relations','padding','circuits','general','gaps','baselines','negatives
 def read_rows(p):
     with p.open(newline='') as f:return list(csv.DictReader(f))
 
+def run_logged(label, command, out):
+    """Retain every attempt, including captured output on a timeout."""
+    started=time.perf_counter()
+    try:
+        result=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=40)
+    except subprocess.TimeoutExpired as exc:
+        def decoded(value):
+            return value.decode('utf-8',errors='replace') if isinstance(value,bytes) else (value or '')
+        (out/(label+'-stdout.txt')).write_text(decoded(exc.stdout),encoding='utf-8')
+        (out/(label+'-stderr.txt')).write_text(decoded(exc.stderr),encoding='utf-8')
+        (out/(label+'-command.json')).write_text(json.dumps(dict(
+            command=command,timeout_seconds=40,timed_out=True,
+            wall_seconds=time.perf_counter()-started),indent=2)+'\n',encoding='utf-8')
+        raise
+    (out/(label+'-stdout.txt')).write_text(result.stdout,encoding='utf-8')
+    (out/(label+'-stderr.txt')).write_text(result.stderr,encoding='utf-8')
+    (out/(label+'-command.json')).write_text(json.dumps(dict(
+        command=command,timeout_seconds=40,timed_out=False,returncode=result.returncode,
+        wall_seconds=time.perf_counter()-started),indent=2)+'\n',encoding='utf-8')
+    return result
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
@@ -22,13 +43,13 @@ def main():
     if out.exists():p.error('output must be a new directory')
     out.mkdir(parents=True)
     started=time.perf_counter();checks=[]
-    unit=subprocess.run([sys.executable,'-m','unittest','discover','-s','tests','-v'],
-                        cwd=ROOT,capture_output=True,text=True,timeout=40)
+    unit=run_logged('unit-tests',[sys.executable,'-B','-X','utf8','-m','unittest',
+                                  'discover','-s','tests','-v'],out)
     (out/'unit-tests.txt').write_text(unit.stdout+unit.stderr)
     if unit.returncode:raise RuntimeError('unit tests failed')
     for suite in SUITES:
-        command=[sys.executable,'-m','speculation.validate',suite,'--output',str(out)]
-        child=subprocess.run(command,cwd=ROOT,capture_output=True,text=True,timeout=40)
+        command=[sys.executable,'-B','-X','utf8','-m','speculation.validate',suite,'--output',str(out)]
+        child=run_logged(suite,command,out)
         if child.returncode:
             (out/(suite+'-failure.txt')).write_text(child.stdout+child.stderr)
             raise RuntimeError('suite failed: '+suite)

@@ -14,8 +14,8 @@ It contains:
 - an exact bit-vector evaluator and a separately implemented trace replay;
 - graph constructors for quantified reductions, complete-state padding, tight
   gaps, composition, and descendant invalidation;
-- explicit pointwise/adaptive/uniform certificates and a verifier;
-- seven deterministic validation suites, thirteen unit tests, and 24 negative
+- explicit adaptive/uniform certificates containing pointwise replay rows, and a verifier;
+- seven deterministic validation suites, fifteen unit tests, and 24 negative
   controls;
 - raw CSV/JSON results, a claim-evidence ledger, a 12+5+5 full-paper
   calibration plus seven direct/closest comparisons, and a row-level verification
@@ -39,6 +39,11 @@ The output directory must not exist. The runner executes unit tests and all
 seven suites in separate one-worker child processes, then compares every
 regenerated CSV row and every declared scientific count with `results/validation/`.
 Timing and memory observations are reported but are not equality targets.
+Each child attempt retains its command, exit/timeout result, stdout, and stderr;
+nonzero exits, timeouts, CSV mismatches, and count mismatches remain failures.
+The standalone repository's scientific workflow runs this command from the flat
+artifact root on Ubuntu 24.04, with a 300-second whole-command timeout and
+always-uploaded raw outputs. Source syntax checks remain a separate check.
 
 ## Individual commands
 
@@ -85,7 +90,16 @@ there is no stored reference-output field.
 | Adaptive/uniform gap instances | 8 |
 | Exhaustive gap-family mask/environment pairs (p=1,2,3) | 168 |
 | Negative controls detected | 24/24 |
-| Unit tests | 13 |
+| Original campaign unit tests | 13 |
+
+The current test suite has 15 tests. Two added regressions require the relation
+and circuit oracles to reject incorrect zero-cost reports that preserve budget
+thresholds. These oracles now check exact pointwise, adaptive, and uniform costs:
+zero on the `d=0` branch and `m` or `m+1` on the `d=1` branch, with the escape
+giving the latter upper bound. The retained seven-suite CSVs and scientific counts
+are unchanged. A bounded Windows-adapted local rerun matched them and passed all
+15 tests; it is separate from the historical Linux resource measurements and
+does not establish native Linux reproduction of the edited sources.
 
 Reference provenance is separate from scientific result counts.
 `reference-verification.csv` covers all 39 manuscript citations;
@@ -121,7 +135,7 @@ record. Scientific equality uses CSV rows and declared counts, not timing or RSS
 - `external_resources.csv`: exact scholarly/official source records and
   integration boundaries.
 - `results/validation-summary.md`: definitions and reconciled counts.
-- `results/clean-reproduction.json`: final clean-extraction outcome.
+- `results/clean-reproduction.json`: historical clean-extraction outcome.
 
 The artifact is self-contained and redistributes no third-party research PDF or
 external code. License terms for the repository are in `LICENSE`; source notices

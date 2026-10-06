@@ -112,6 +112,13 @@ of its preceding selection bits. The fresh output is monotone in prefix values
 because F+ and H are. Ref=1, so success is upward closed. For d=0 every repair
 succeeds. Thus the asserted monotonicity holds in both cases. QED.
 
+**Exact costs for validation.** When d=1, coverage needs at least m selections,
+and selecting the escape chain succeeds for every u at cost m+1. Hence C(d=1,u)
+is m when some x satisfies F(u,x), and m+1 otherwise; C(d=0,u)=0. It follows that
+A is m iff forall u exists x F(u,x), and U is m iff exists x forall u F(u,x).
+When the corresponding condition is false, the cost is m+1. These exact values
+are properties of this gadget, not of arbitrary graphs.
+
 **Why the escape is necessary.** Full repair must always agree with reference.
 Without a forced all-fresh success path, an unsatisfiable F could destroy this
 invariant. A chain of m rather than m+1 would be affordable, accepting even a
@@ -337,10 +344,11 @@ indexed by the shared inputs, rather than only its maximum, is necessary here.
 ## 7. Nonmonotonicity is possible but is not the source of Main Theorem 4
 
 In a different construction use H=XOR(t,f), two cached-zero COPY(d) selectors,
-an escape chain of length two, and output escape OR H. At d=1, repairing {t}
-succeeds, while its superset {t,f} fails; repairing the full prefix succeeds.
-Thus success is not generally upward closed. Taking the union of successful
-adaptive masks is not a generally valid way of obtaining a uniform mask. This
+an escape chain of length two, and output escape OR H. At d=1, both {t} and {f}
+succeed, but their union {t,f} fails; repairing the full prefix succeeds. At d=0,
+every mask succeeds. Thus each singleton is a successful adaptive policy over
+the domain, while their union is not uniform. Success is not generally upward
+closed. This
 example is separate from the monotone construction in Main Lemma 1: the hardness and
 tight adaptive/uniform gap do not depend on nonmonotonic repair behavior.
 

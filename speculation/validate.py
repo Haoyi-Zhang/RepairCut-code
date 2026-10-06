@@ -40,6 +40,25 @@ def selected(g, mask):
     return {name for j, name in enumerate(g.speculative) if mask >> j & 1}
 
 
+def require_reduction_costs(result, oracle, m):
+    """Check exact costs for the zero-predicted, uncertain-d selection gadget.
+
+    In a d=1 environment, coverage costs at least m and the escape costs m+1.
+    Thus a true relation has optimum m, not merely an optimum at most m.
+    The d=0 environments require no repair. The same lower bound and escape
+    give exact adaptive and uniform costs from their quantified truth values.
+    """
+    expected_pointwise = []
+    for exists in oracle['pointwise']:
+        expected_pointwise.extend((0, m if exists else m+1))
+    require(result.pointwise_min == expected_pointwise,
+            'exact pointwise relation costs mismatch')
+    require(result.adaptive_min == (m if oracle['adaptive'] else m+1),
+            'exact adaptive relation cost mismatch')
+    require(result.uniform_min == (m if oracle['uniform'] else m+1),
+            'exact uniform relation cost mismatch')
+
+
 def relations():
     records, checks, replay_rows, lattice_edges = [], 0, 0, 0
     for q, m in ((1, 1), (1, 2), (2, 1)):
@@ -49,11 +68,7 @@ def relations():
                                         ('monotone-dual-rail', monotone_reduction)):
                 g = constructor(q, m, table)
                 a = analyze(g)
-                require((a.adaptive_min <= m) == oracle['adaptive'], 'adaptive relation mismatch')
-                require((a.uniform_min <= m) == oracle['uniform'], 'uniform relation mismatch')
-                for u, exists in enumerate(oracle['pointwise']):
-                    require((a.pointwise_min[1+2*u] <= m) == exists, 'pointwise relation mismatch')
-                    require(a.pointwise_min[2*u] == 0, 'd=0 should cost zero')
+                require_reduction_costs(a, oracle, m)
                 if q == m == 1:
                     for mask in range(1 << a.p):
                         for i, e in enumerate(g.environments()):
@@ -126,8 +141,7 @@ def circuits():
         oracle = relation_truth(table, q, m)
         g = circuit_reduction(formula, q, m)
         a = analyze(g)
-        require((a.adaptive_min <= m) == oracle['adaptive'], 'circuit adaptive mismatch')
-        require((a.uniform_min <= m) == oracle['uniform'], 'circuit uniform mismatch')
+        require_reduction_costs(a, oracle, m)
         # A positive/negative rail is created at most six times per source gate.
         require(len(g.nodes) <= (3*m+1)+q+6*len(formula.nodes)+2*m+1,
                 'linear construction size bound failed')
