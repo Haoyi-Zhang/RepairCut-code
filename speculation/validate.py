@@ -146,8 +146,9 @@ def circuits():
         require(len(g.nodes) <= (3*m+1)+q+6*len(formula.nodes)+2*m+1,
                 'linear construction size bound failed')
         for i, e in enumerate(g.environments()):
+            reference = run(g, e, None)[0]
             for mask in range(1 << a.p):
-                good = run(g, e, selected(g, mask))[0] == run(g, e, None)[0]
+                good = run(g, e, selected(g, mask))[0] == reference
                 require(bool(a.good_environments(mask) >> i & 1) == good, 'circuit replay mismatch')
                 replay_rows += 1
         records.append(dict(case=index,q=q,m=m,formula_gates=len(formula.nodes),

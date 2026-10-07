@@ -15,7 +15,7 @@ It contains:
 - graph constructors for quantified reductions, complete-state padding, tight
   gaps, composition, and descendant invalidation;
 - explicit adaptive/uniform certificates containing pointwise replay rows, and a verifier;
-- seven deterministic validation suites, fifteen unit tests, and 24 negative
+- seven deterministic validation suites, 21 unit tests, and 24 negative
   controls;
 - raw CSV/JSON results, a claim-evidence ledger, a 12+5+5 full-paper
   calibration plus seven direct/closest comparisons, and a row-level verification
@@ -69,6 +69,16 @@ python -m speculation verify cases/active-input-gap.json /tmp/speculation-certif
 
 Generated directories and certificates must not already exist.
 
+The optional portable command `python -B tests/test_circuit_reference.py -v`
+runs six finite regressions. It compiles five unchanged pure function definitions
+from the current validator, bounds only the first seeded loop to 16 graphs, and
+checks every mask against a test-local scalar reference. It does not import the
+Linux runner, replace its resource guards, or reproduce the seven-suite campaign.
+The same file is included by the regular CI's existing test discovery.
+For circuit validation, the independent scalar reference is now obtained once
+per environment; every mixed replay, comparison and scientific counter remains.
+This is bookkeeping reuse, not a measured speedup.
+
 Certificate rows contain exactly `environment`, `selected`, `cache`, `trace`, and
 `output`. Verification replays those fields and recomputes the reference output;
 there is no stored reference-output field.
@@ -92,13 +102,15 @@ there is no stored reference-output field.
 | Negative controls detected | 24/24 |
 | Original campaign unit tests | 13 |
 
-The current test suite has 15 tests. Two added regressions require the relation
-and circuit oracles to reject incorrect zero-cost reports that preserve budget
+The current test inventory has 21 methods: the original 13, two exact-cost
+regressions, and six portable circuit-reference regressions. The two exact-cost
+regressions require the relation and circuit oracles to reject incorrect
+zero-cost reports that preserve budget
 thresholds. These oracles now check exact pointwise, adaptive, and uniform costs:
 zero on the `d=0` branch and `m` or `m+1` on the `d=1` branch, with the escape
 giving the latter upper bound. The retained seven-suite CSVs and scientific counts
-are unchanged. A bounded Windows-adapted local rerun matched them and passed all
-15 tests; it is separate from the historical Linux resource measurements and
+are unchanged. A retained Windows-adapted local rerun matched them and passed all
+15 then-existing tests; it is separate from the historical Linux resource measurements and
 does not establish native Linux reproduction of the edited sources.
 
 Reference provenance is separate from scientific result counts.
@@ -121,7 +133,7 @@ Each suite runs in one child process with one CPU, a 3 GiB virtual-address cap,
 above 2^25 environment/repair rows or a conservative 2 GiB bit-vector payload.
 A timeout or admission rejection is a failure, never a scientific answer.
 
-The current Ubuntu reproduction passed 15 tests and matched seven suites,
+The retained Ubuntu reproduction passed 15 tests and matched seven suites,
 2,134 ordered CSV rows, and every scientific count. It measured 6.333108 child
 CPU seconds, 6.571371 elapsed seconds, and 37,152 KiB peak child RSS; the raw
 record is in `results/measurements/current-linux/`. Earlier measurements remain

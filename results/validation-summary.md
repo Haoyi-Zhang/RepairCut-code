@@ -4,13 +4,18 @@ The retained campaign passed all seven suites and all thirteen original unit tes
 implementation evidence, not a representative workload study, a formal proof
 assistant, or independent peer review.
 
-The current suite has fifteen unit tests, including two regressions that reject
+The retained fifteen-method suite includes two regressions that reject
 incorrect zero-cost reports in the relation/circuit cost oracles. A bounded
 Windows-adapted rerun passed all fifteen and matched every retained scientific
 CSV row and suite count. The cost oracles now check the exact `m`/`m+1` result on
 the `d=1` branch, not just budget-threshold truth. Original raw counts and Linux
 timings below remain historical observations; the adapted rerun is not native
 Linux reproduction or a document build.
+
+The current inventory adds six portable circuit-reference regressions, for21
+methods discovered by the existing CI. They bound the first seeded loop to16
+graphs and check its pure function bodies independently. Their finite scope is
+separate from the retained full-campaign results and native resource validation.
 
 ## Reconciled counts and meanings
 
