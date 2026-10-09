@@ -140,4 +140,4 @@ is recorded as an external-submission rule-recheck hold, not a scientific gap.
 
 ## Bibliography separation
 
-The final manuscript has 39 references, all actually cited and each mapped in `reference-verification.csv`. The 12+5+5 calibration requirement is tracked separately from seven extra direct/closest comparisons; calibration-only papers do not enter the bibliography merely to increase its size.
+The manuscript has 39 cited references, each mapped in `reference-verification.csv`. The comparison notes distinguish structural calibration sources from the seven additional direct or closest comparisons.
