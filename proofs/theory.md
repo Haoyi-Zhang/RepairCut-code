@@ -119,8 +119,11 @@ A is m iff forall u exists x F(u,x), and U is m iff exists x forall u F(u,x).
 When the corresponding condition is false, the cost is m+1. These exact values
 are properties of this gadget, not of arbitrary graphs.
 
-**Why the escape is necessary.** Full repair must always agree with reference.
-Without a forced all-fresh success path, an unsatisfiable F could destroy this
+**Why the escape is necessary.** Full repair agrees with reference by topological
+induction, with or without the escape. The escape fixes the reference output at
+one for d=1 and supplies an unconditional repair of cost m+1, above budget m.
+Without it, a false F could make the reference output zero and admit cheap
+repairs, destroying the reduction equivalence rather than the full-repair
 invariant. A chain of m rather than m+1 would be affordable, accepting even a
 false F. The negative-control test makes precisely that one-gate mutation.
 
