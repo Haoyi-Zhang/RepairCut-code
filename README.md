@@ -114,7 +114,7 @@ are unchanged. A retained Windows-adapted local rerun matched them and passed al
 does not establish native Linux reproduction of the edited sources.
 
 Reference provenance is separate from scientific result counts.
-`reference-verification.csv` covers all 39 manuscript citations;
+`reference-verification.csv` covers all 51 manuscript citations;
 `literature-calibration.csv` contains 29 full-paper rows (12 TPDS, five
 influential, five adjacent, and seven non-counted direct/closest comparisons),
 and `external_resources.csv` records all scholarly and workflow inputs.
