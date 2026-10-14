@@ -107,9 +107,9 @@ there is no stored reference-output field.
 | Negative controls detected | 24/24 |
 | Original campaign unit tests | 13 |
 
-The current test inventory has 27 methods: the original 13, two exact-cost
-regressions, six portable circuit-reference regressions, and six file-free
-admission regressions. The two exact-cost
+The current test inventory has 29 methods: the original 13, two exact-cost
+regressions, six portable circuit-reference regressions, six file-free
+admission regressions, and two portability and resource-accounting regressions. The two exact-cost
 regressions require the relation and circuit oracles to reject incorrect
 zero-cost reports that preserve budget
 thresholds. These oracles now check exact pointwise, adaptive, and uniform costs:
