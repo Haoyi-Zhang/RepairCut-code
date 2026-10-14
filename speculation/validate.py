@@ -419,6 +419,7 @@ def main():
                         help='A new directory; existing result files are never overwritten')
     args=parser.parse_args()
     resource_guard()
+    import resource
     args.output.mkdir(parents=True,exist_ok=True)
     jp=args.output/(args.suite+'.json'); cp=args.output/(args.suite+'.csv')
     if jp.exists() or cp.exists():

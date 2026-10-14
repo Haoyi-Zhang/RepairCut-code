@@ -15,7 +15,7 @@ It contains:
 - graph constructors for quantified reductions, complete-state padding, tight
   gaps, composition, and descendant invalidation;
 - explicit adaptive/uniform certificates containing pointwise replay rows, and a verifier;
-- seven deterministic validation suites, 28 unit tests, and 24 negative
+- seven deterministic validation suites, 29 unit tests, and 24 negative
   controls;
 - raw CSV/JSON results, a claim-evidence ledger, a 12+5+5 full-paper
   calibration plus seven direct/closest comparisons, and a row-level verification

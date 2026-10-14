@@ -1,11 +1,37 @@
 """Pure checks import without POSIX; bounded campaigns still require limits."""
 from pathlib import Path
+from contextlib import redirect_stdout
+import io
+import json
 import subprocess
 import sys
+import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 
 class PortableImportTests(unittest.TestCase):
+    def test_campaign_cli_collects_resource_usage_after_admission(self):
+        from speculation import validate
+        usage = SimpleNamespace(ru_maxrss=1234)
+        resource = SimpleNamespace(RUSAGE_SELF=0, getrusage=lambda who: usage)
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / 'results'
+            arguments = ['validate', 'relations', '--output', str(output)]
+            with patch.object(sys, 'argv', arguments), \
+                 patch.dict(sys.modules, {'resource': resource}), \
+                 patch.object(validate, 'resource_guard') as guard, \
+                 patch.dict(validate.SUITES, {'relations': lambda: ([{'case': 'cli'}], {'cases': 1})}), \
+                 redirect_stdout(io.StringIO()):
+                validate.main()
+            guard.assert_called_once_with()
+            report = json.loads((output / 'relations.json').read_text())
+            self.assertEqual(report['peak_rss_kib'], 1234)
+            self.assertEqual(report['counts'], {'cases': 1})
+            self.assertEqual(report['status'], 'finite checks passed')
+            self.assertTrue((output / 'relations.csv').is_file())
+
     def test_finite_imports_and_fail_closed_campaign_without_resource(self):
         script = r'''
 import builtins
