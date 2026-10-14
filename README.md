@@ -15,7 +15,7 @@ It contains:
 - graph constructors for quantified reductions, complete-state padding, tight
   gaps, composition, and descendant invalidation;
 - explicit adaptive/uniform certificates containing pointwise replay rows, and a verifier;
-- seven deterministic validation suites, 21 unit tests, and 24 negative
+- seven deterministic validation suites, 27 unit tests, and 24 negative
   controls;
 - raw CSV/JSON results, a claim-evidence ledger, a 12+5+5 full-paper
   calibration plus seven direct/closest comparisons, and a row-level verification
@@ -102,8 +102,9 @@ there is no stored reference-output field.
 | Negative controls detected | 24/24 |
 | Original campaign unit tests | 13 |
 
-The current test inventory has 21 methods: the original 13, two exact-cost
-regressions, and six portable circuit-reference regressions. The two exact-cost
+The current test inventory has 27 methods: the original 13, two exact-cost
+regressions, six portable circuit-reference regressions, and six file-free
+admission regressions. The two exact-cost
 regressions require the relation and circuit oracles to reject incorrect
 zero-cost reports that preserve budget
 thresholds. These oracles now check exact pointwise, adaptive, and uniform costs:
@@ -132,6 +133,13 @@ Each suite runs in one child process with one CPU, a 3 GiB virtual-address cap,
 35 CPU seconds, and a 40-second wall timeout. The exact evaluator rejects cases
 above 2^25 environment/repair rows or a conservative 2 GiB bit-vector payload.
 A timeout or admission rejection is a failure, never a scientific answer.
+
+The optional `analyze(..., max_rows=...)` argument accepts an exact positive
+integer no larger than 2^25. It can tighten admission, not disable the hard cap.
+Run `python -B -m unittest discover -s tests -p test_admission.py -v` for the six
+file-free admission regressions. They compare small masks with scalar replay
+and reject oversized requests before bit-vector allocation; they do not rerun
+the retained campaign or measure performance.
 
 The retained Ubuntu reproduction passed 15 tests and matched seven suites,
 2,134 ordered CSV rows, and every scientific count. It measured 6.333108 child

@@ -44,6 +44,8 @@ class Result:
 
 
 def analyze(graph: Graph, max_rows: int = MAX_ROWS) -> Result:
+    if type(max_rows) is not int or not 1 <= max_rows <= MAX_ROWS:
+        raise ValueError(f'max_rows must be an integer in 1..{MAX_ROWS}; the hard cap cannot be raised')
     q, p = len(graph.uncertain), len(graph.speculative)
     total_bits = q+p
     rows = 1 << total_bits
