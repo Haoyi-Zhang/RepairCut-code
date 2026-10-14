@@ -1,22 +1,21 @@
 # Observation and information boundaries of bounded cache repair
 
-## Status and scope
+## Proofs and finite validation
 
-The arguments below are mathematical proofs in prose, not mechanized proofs. The
-executable checks validate finite instances and independently implemented Boolean
-semantics; they do not establish the unbounded theorems. Computational complexity
-uses polynomial many-one reductions and the usual circuit characterizations of
-NP, coNP, Sigma_2^P and Pi_2^P. No separation of these classes is assumed.
+The proofs use topological induction, polynomial many-one reductions, and the
+usual circuit characterizations of NP, coNP, Sigma_2^P and Pi_2^P. The executable
+checks exhaust the specified finite instances and compare separately implemented
+Boolean semantics. No separation of the complexity classes is assumed.
 
 Complexity statements range over arbitrarily large finite graph encodings. The
 implementation's fixed admission caps bound experiments; they do not restrict
 the unbounded family in those statements.
 
-This model is a finite, private, deterministic, Boolean, single-assignment DAG.
-It is not a semantics of JavaScript, a browser, network requests, mutable DOMs,
-irrevocable effects, concurrency races, failures of physical machines, or timing
-side channels. Its application is an explicit boundary for a buffered stage of
-an execution graph, not an implementation of a web optimizer.
+The model is a finite, private, deterministic Boolean single-assignment DAG with
+one input-revelation barrier, one topological repair pass, and atomic observation.
+It describes a buffered computational stage through declared Boolean primitives
+and an observation tuple. Applying the bounds to a native or deployed system
+requires an operational account of that system's effects and visibility.
 
 ## 1. Operational definitions
 
@@ -153,10 +152,10 @@ d=0 imposes no constraint. The arbitrary circuit formulation avoids assuming
 that an inappropriate CNF restriction preserves a quantified hardness result.
 An unused existential bit can ensure m>=1 without changing truth. QED.
 
-The quantifier pattern and quantified-circuit hardness sources are established
-complexity machinery, not a new theorem about quantifiers. The specific content
-here is its realization with this repair semantics, monotone repair feasibility,
-a COPY-only tree prefix, and the comparison with complete-state observation below.
+The reductions realize established quantified-circuit complexity within the
+repair semantics: successful repair families remain monotone, the speculative
+prefix is a COPY-only tree, and complete-state observation yields the contrasting
+classification below.
 
 ## 3. Complete-state observation removes existential repair choice
 
@@ -368,16 +367,14 @@ q. Checking a supplied exponentially long certificate is not a compact proof of
 the general quantified decision problem, and a successful trace does not by
 itself establish minimality.
 
-The artifact checks exact declared operand edges, graph schema, finite tables,
-Boolean gates, and all explicitly enumerated environments. It cannot check that
-an imported native operation has no unmodeled effects, and it has no native
-operation primitive. Missing-edge cases are controlled schema mutations of owned
-toy graphs, not discoveries of hidden dependencies on websites. The semantics
-contains no outgoing communication and no exploit-oriented testing.
+The artifact admits the declared Boolean primitives and checks operand edges,
+graph schema, finite tables, and all enumerated environments. Missing-edge
+controls mutate the operand lists of generated graphs, exercising the parser's
+dependency-completeness check.
 
-The independent replay implementation does not call the bit evaluator's gate
-semantics. It shares the data schema only. Their agreement is useful engineering
-evidence, not an independent scientific review. Complete-state characterization,
-quantified-relation oracles, monotonic lattice edges, and the escape off-by-one
-control attack different potential mistakes in the reductions. None is a
-substitute for the proofs above.
+The replay implementation and bit evaluator share the graph schema and implement
+their gate operations separately. Their agreement checks consistency between the
+two implementations. Complete-state characterization, quantified-relation
+oracles, monotonic lattice edges, and the escape off-by-one control test distinct
+construction and implementation obligations; the written proofs establish the
+general results.
