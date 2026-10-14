@@ -15,7 +15,7 @@ It contains:
 - graph constructors for quantified reductions, complete-state padding, tight
   gaps, composition, and descendant invalidation;
 - explicit adaptive/uniform certificates containing pointwise replay rows, and a verifier;
-- seven deterministic validation suites, 27 unit tests, and 24 negative
+- seven deterministic validation suites, 28 unit tests, and 24 negative
   controls;
 - raw CSV/JSON results, a claim-evidence ledger, a 12+5+5 full-paper
   calibration plus seven direct/closest comparisons, and a row-level verification
@@ -30,6 +30,11 @@ checks are bounded implementation evidence, not general proofs or workload data.
 
 Use Python 3.10 or newer on Linux. No pip package, dataset, network access, GPU,
 model API, credential, or parent project directory is required.
+
+Pure model functions, certificate replay, and the complete unit suite also run
+without the POSIX `resource` module. Resource limits are loaded when the bounded
+campaign starts; that campaign refuses execution if the required limits are
+unavailable. The unit suite retains those limits on POSIX hosts.
 
 ```sh
 python reproduce.py --output /tmp/speculation-reproduction

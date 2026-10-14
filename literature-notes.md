@@ -33,13 +33,19 @@ work. Its explicit missing-dependency boundary motivates declaring the modeled
 language, but it does not define a repair mask chosen after a prediction is
 revealed, an observation projection, or pointwise/adaptive/uniform repair costs.
 
-**Oblique** symbolically explores client/server logic to prefetch resources that
-depend on client state. Its symbolic paths, timeouts, native-code boundary, and
-page-load evidence concern prediction of future requests. The present model has
-no network requests, secrets, browser, page-load latency, or symbolic server
-execution.
+**Oblique** derives symbolic resource URLs for client-side prefetching. Its
+optional server-side analysis runs on first-party infrastructure. Symbolic paths,
+timeouts, the native-code boundary, and page-load measurements concern that
+prefetching mechanism. The present Boolean-DAG model instead fixes the cached
+computation and studies repair after an input-revelation barrier.
 
 ### Incremental rebuilding and graph-constrained replay
+
+**Adapton** explicitly separates inner incremental computations from outer
+observers and propagates changes through demanded computation. Observer-sensitive
+recomputation is an established precedent. The present result concerns a fixed
+pure Boolean DAG, a one-pass repair mask, commitment timing, budget complexity,
+and worst-case factor bounds.
 
 **Build Systems à la Carte** is a materially closer formal comparison than a
 generic scheduling paper. It separates task semantics, scheduling, and rebuilding;
@@ -81,8 +87,10 @@ DAG cannot inherit their deployment or performance claims.
 ### Diagnosis and repair
 
 Classical diagnosis searches for inconsistent components. **Using QBF to
-Increase the Accuracy of SAT-Based Debugging** already uses quantifier order to
-require a candidate repair to work across inputs. **Program Repair for
+Increase the Accuracy of SAT-Based Debugging** checks a fixed fault candidate by
+seeking an input that no assignment of its correction values can fix. The cached
+mask in the present model is instead chosen before or after revelation.
+**Program Repair for
 Hyperproperties** and its CAV 2024 syntax-guided extension study multi-trace
 requirements and richer transition/program repairs. Therefore quantifier
 alternation, QBF encodings, and repair complexity are prior art. The bounded

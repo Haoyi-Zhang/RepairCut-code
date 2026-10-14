@@ -1,8 +1,10 @@
 import copy
+import os
 import unittest
 from unittest.mock import patch
 from speculation.validate import resource_guard
-resource_guard()
+if os.name == 'posix':
+    resource_guard()
 from speculation.model import Graph,Node,load_graph
 from speculation.builders import (gap_graph,full_observer,circuit_reduction,
                                   invalidation_gap_graph)

@@ -8,7 +8,6 @@ import json
 import os
 from pathlib import Path
 import random
-import resource
 import time
 from fractions import Fraction
 
@@ -29,6 +28,13 @@ def require(condition: bool, message: str):
 
 
 def resource_guard():
+    try:
+        import resource
+    except ModuleNotFoundError as error:
+        raise RuntimeError(
+            'The bounded campaign requires POSIX resource limits; '
+            'pure model functions and unit tests remain portable.'
+        ) from error
     if hasattr(os, 'sched_getaffinity'):
         os.sched_setaffinity(0, {min(os.sched_getaffinity(0))})
     limit = 3 * 1024**3
