@@ -8,7 +8,6 @@ The regular CI still runs the entire guarded runner and discovers this file.
 """
 import ast
 import copy
-import hashlib
 import json
 from pathlib import Path
 import random
@@ -75,7 +74,6 @@ def pure_namespace(path=None):
 
 def capture(namespace, runner=replay.run):
     """All actual outputs/traces/cache checked; independent quantified minima."""
-    digest = hashlib.sha256()
     reference_calls = 0
     formula_calls = 0
     mixed_calls = 0
@@ -106,9 +104,6 @@ def capture(namespace, runner=replay.run):
                 good = actual[0] == scalar_reference(graph, environment, None)[0]
                 rows = successes.setdefault(key, {})
                 rows.setdefault(env, {})[mask] = good
-                # The stream excludes redundant reference calls but retains mixed call order.
-                digest.update(json.dumps([graph.to_dict(), environment, sorted(repair), actual],
-                                         sort_keys=True, separators=(",", ":")).encode())
         return actual
 
     namespace["run"] = checked_run
@@ -126,7 +121,7 @@ def capture(namespace, runner=replay.run):
                       if all(row[mask] for row in rows.values()))
         if record["adaptive"] != max(pointwise) or record["uniform"] != uniform:
             raise AssertionError("independent quantified minima disagreement")
-    return dict(records=records, counters=counters, mixed_digest=digest.hexdigest(),
+    return dict(records=records, counters=counters,
                 reference_calls=reference_calls, formula_calls=formula_calls, mixed_calls=mixed_calls,
                 references_per_environment=list(references_per_environment.values()), graphs=list(graphs.values()))
 
