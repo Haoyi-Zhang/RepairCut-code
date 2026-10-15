@@ -28,6 +28,7 @@ checks are bounded implementation evidence, not general proofs or workload data.
 
 ## One-command clean reproduction
 
+Run commands from this repository's root (`artifact/` in the project bundle).
 Use Python 3.10 or newer on Linux. No pip package, dataset, network access, GPU,
 model API, credential, or parent project directory is required.
 
@@ -63,7 +64,8 @@ python -m speculation.validate baselines --output /tmp/speculation-baselines
 python -m speculation.validate negatives --output /tmp/speculation-negatives
 ```
 
-The graph/certificate interface can be exercised independently:
+On Linux, the graph/certificate CLI can be exercised without running the
+validation suites. It enforces the same POSIX resource limits:
 
 ```sh
 python -m speculation analyze cases/active-input-gap.json
@@ -72,7 +74,9 @@ python -m speculation certify cases/active-input-gap.json --mode uniform --outpu
 python -m speculation verify cases/active-input-gap.json /tmp/speculation-certificate.json
 ```
 
-Generated directories and certificates must not already exist.
+For individual validation suites, the output directory may already exist, but
+the suite's `<suite>.csv` and `<suite>.json` must not. Certificate output files
+must not exist; their parent directory must exist.
 
 The optional portable command `python -B tests/test_circuit_reference.py -v`
 runs six finite regressions. It compiles five unchanged pure function definitions
@@ -150,7 +154,7 @@ The retained Ubuntu reproduction passed 15 tests and matched seven suites,
 2,134 ordered CSV rows, and every scientific count. It measured 6.333108 child
 CPU seconds, 6.571371 elapsed seconds, and 37,152 KiB peak child RSS; the raw
 record is in `results/measurements/current-linux/`. Earlier measurements remain
-in `cpu-accounting.json`. Scientific equality excludes timing and RSS.
+in `results/cpu-accounting.json`. Scientific equality excludes timing and RSS.
 
 ## Evidence map
 
